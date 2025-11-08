@@ -1,0 +1,67 @@
+﻿@model List<CollegeCost>
+
+@if (TempData.Keys.Contains("message"))
+{
+    <h4 class="bg-success m-1">@TempData["message"]</h4>
+}
+
+@{
+    ViewBag.Title = "Load a Saved Budget";
+}
+
+<h1>Saved Budgets</h1>
+
+@if(Model.Count <= 0){
+    <h1>No budgets are currently saved to the database</h1>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-primary">Go Back</a>
+}
+else{
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Budget Id</th>
+                <th>Cost per Credit Hour</th>
+                <th>Timeframe</th>
+                <th>Credit Hours per Term</th>
+                <th>Cost of Housing</th>
+                <th>Cost of Books</th>
+                <th>Years to Graduate</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var budget in Model)
+            {
+                <tr>
+                    <td>@budget.CollegeCostId</td>
+                    <td>@budget.CostPerCreditHour</td>
+                    <td>@budget.Timeframe</td>
+                    <td>@budget.CreditHoursPerTerm</td>
+                    <td>@budget.CostOfHousing</td>
+                    <td>@budget.CostOfBooks</td>
+                    <td>@budget.YearsToGraduate</td>
+                    <td>
+                        <a asp-action="Load"
+                           asp-route-id="@budget.CollegeCostId"
+                           class="btn btn-primary">Load</a>
+                    </td>
+                    <td>
+                        <a asp-action="Edit"
+                           asp-route-id="@budget.CollegeCostId"
+                           class="btn btn-primary">Edit</a>
+                    </td>
+                    <td>
+                        <a asp-action="Delete"
+                           asp-route-id="@budget.CollegeCostId"
+                           class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="row">
+        <a asp-controller="Home" asp-action="Index" class="btn btn-primary col-md-4 col-6">Back to Home</a>
+    </div>
+}

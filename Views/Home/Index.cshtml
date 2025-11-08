@@ -1,0 +1,105 @@
+﻿@model CollegeCost
+
+@{
+    ViewData["Title"] = "Tuition Calculator";
+}
+
+@section scripts {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/js/IsValidUsd.js"></script>
+}
+
+<div class="border rounded home-form">
+
+    @* define a form that the user can provide input to be submitted for processing *@
+    @* use "row" and "col" bootstrap classes as needed to provide responsive web design support + margin-bottom spacing of 3px to separate each row*@
+    <form asp-controller="Results" asp-action="List" method="post" class="HomeForm">@* uses a tag helper so results of the form are posted to the ResultsController for processing*@
+        <div class="row m-1 text-center calculator-header">
+            <h1 class="col">@ViewBag.Title</h1>
+        </div>
+        <div class="row m-1">
+            @* define a label and input element using asp-for tag helpers to bind their value to that appropriate property of the model class *@
+            <div class="col-md-3 col-6">
+                <label asp-for="CostPerCreditHour" class="form-label">Cost per credit hour</label>
+            </div>
+            <div class="col-md-4 col-6">
+                <input asp-for="CostPerCreditHour" class="form-control" />@* applies bootstrap class for styling *@
+            </div>
+            <div class="col-md-5 col-12">
+                <span asp-validation-for="CostPerCreditHour" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row m-1">
+            <div class="col-md-3 col-6">
+                <label asp-for="Timeframe" class="form-label">Timeframe</label>
+            </div>
+            <div class="col-md-4 col-6">
+                <select asp-for="Timeframe" class="form-select col-6">
+                    <option value="">Please make a selection...</option>
+                    <option>Quarter</option>
+                    <option>Semester</option>
+                    <option>Year</option>
+                </select>
+            </div>
+            <div class="col-md-5 col-12">
+                <span asp-validation-for="Timeframe" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row m-1">
+            <div class="col-md-3 col-6">
+                <label asp-for="CreditHoursPerTerm" class="form-label">Credit hours per term</label>
+            </div>
+            <div class="col-md-4 col-6">
+                <input asp-for="CreditHoursPerTerm" class="form-control" type="text"/>
+            </div>
+            <div class="col-md-5 col-12">
+                <span asp-validation-for="CreditHoursPerTerm" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row m-1">
+            <div class="col-md-3 col-6">
+                <label asp-for="CostOfHousing" class="form-label">Cost of housing</label>
+            </div>
+            <div class="col-md-4 col-6">
+                <input asp-for="CostOfHousing" class="form-control" />
+            </div>
+            <div class="col-md-5 col-12">
+                <span asp-validation-for="CostOfHousing" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row m-1">
+            <div class="col-md-3 col-6">
+                <label asp-for="CostOfBooks" class="form-label">Cost of books</label>
+            </div>
+            <div class="col-md-4 col-6">
+                <input asp-for="CostOfBooks" class="form-control" />
+            </div>
+            <div class="col-md-5 col-12">
+                <span asp-validation-for="CostOfBooks" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row m-1">
+            <div class="col-md-3 col-6">
+                <label asp-for="YearsToGraduate" class="form-label">Years to graduate</label>
+            </div>
+            <div class="col-md-4 col-6">
+                <input asp-for="YearsToGraduate" class="form-control" type="text" />
+            </div>
+            <div class="col-md-5 col-12">
+                <span asp-validation-for="YearsToGraduate" class="text-danger"></span>
+            </div>
+        </div>
+
+        @* define a button that submits user's entered data for calculation to the controller*@
+        @* also includes a link to access the database interface*@
+        <div class="row m-1">
+            <div class="col-md-3 col-6">
+                <button type="submit" class="btn btn-primary w-100">Calculate</button>
+            </div>
+            <div class="col-md-3 col-6">
+                <a asp-controller="Results" asp-action="Database" class="btn btn-primary w-100">Access Database</a>
+            </div>            
+        </div>
+    </form>
+</div>

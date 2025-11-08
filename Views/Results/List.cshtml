@@ -1,0 +1,104 @@
+﻿@model CollegeCost
+
+@{
+    ViewData["Title"] = "Tuition Calculator - Results";
+}
+
+@* define a container element to display a message that a model was successfully save to the database if a message exists*@
+@if(TempData.Keys.Contains("message")){
+    <h4 class="bg-success m-1">@TempData["message"]</h4>
+}
+
+<h1 class="text-center">Results</h1>
+
+@* define a table to display the results of calculations *@
+<table class="table table-bordered table-striped bg-info">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="fw-bold">Cost per Credit Hour:</td>
+            <td>@Model.CostPerCreditHour.ToString("c")</td>
+        </tr>
+        <tr>
+            <td class="fw-bold">Timeframe:</td>
+            <td>@Model.Timeframe</td>
+        </tr>
+        <tr>
+            <td class="fw-bold">Credit Hours per Term:</td>
+            <td>@Model.CreditHoursPerTerm</td>
+        </tr>
+        <tr>
+            <td class="fw-bold">Cost of Housing:</td>
+            <td>@Model.CostOfHousing.ToString("c")</td>
+        </tr>
+        <tr>
+            <td class="fw-bold">Cost of Books:</td>
+            <td>@Model.CostOfBooks.ToString("c")</td>
+        </tr>
+        <tr>
+            <td class="fw-bold">Years to Graduate:</td>
+            <td>@Model.YearsToGraduate</td>
+        </tr>
+        <tr>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="fw-bold">Total Credit Hours::</td>
+            <td>@Model.TotalCreditHours</td>
+        </tr>
+        <tr>
+            <td class="fw-bold">Average Housing per Year:</td>
+            <td>@Model.AverageHousingPerYear.ToString("c")</td>
+        </tr>
+        <tr>
+            <td class="fw-bold">Average Books per Year:</td>
+            <td>@Model.AverageBooksPerYear.ToString("c")</td>
+        </tr>
+        <tr>
+            <td class="fw-bold">Average Tuition per Year:</td>
+            <td>@Model.AverageTuitionPerYear.ToString("c")</td>
+        </tr>
+     </tbody>
+</table>
+<div class="row">
+    @* Define a form with a Back button that passes user-entered data of the generated model back to the homepage *@
+    <div class="col-md-3 col-4">
+        <form asp-controller="Home" asp-action="Index" method="post">
+            @Html.HiddenFor(m => m.CostPerCreditHour)
+            @Html.HiddenFor(m => m.Timeframe)
+            @Html.HiddenFor(m => m.CreditHoursPerTerm)
+            @Html.HiddenFor(m => m.CostOfHousing)
+            @Html.HiddenFor(m => m.CostOfBooks)
+
+            <button type="submit" class="btn btn-primary w-100">Back to Home</button>
+        </form>
+    </div>
+
+    @* Define a form with a Save button that passes all data for the generated model to be saved to the database *@
+    <div class="col-md-3 col-4">
+        <form asp-controller="Results" asp-action="Save" method="post">
+            @Html.HiddenFor(m => m.CostPerCreditHour)
+            @Html.HiddenFor(m => m.Timeframe)
+            @Html.HiddenFor(m => m.CreditHoursPerTerm)
+            @Html.HiddenFor(m => m.CostOfHousing)
+            @Html.HiddenFor(m => m.CostOfBooks)
+            @Html.HiddenFor(m => m.YearsToGraduate)
+            @Html.HiddenFor(m => m.TotalCreditHours)
+            @Html.HiddenFor(m => m.AverageHousingPerYear)
+            @Html.HiddenFor(m => m.AverageBooksPerYear)
+            @Html.HiddenFor(m => m.AverageTuitionPerYear)
+
+            <button type="submit" class="btn btn-primary w-100">Save</button>
+        </form>
+    </div>
+    <div class="col-md-3 col-4">
+        <a asp-controller="Results" asp-action="Database" class="btn btn-primary w-100">Access Database</a>
+    </div>    
+</div>
+
+

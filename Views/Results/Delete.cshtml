@@ -1,0 +1,16 @@
+﻿@model CollegeCost
+@{
+    ViewBag.Title = "Delete Budget";
+}
+
+<div class="alert-danger mt-4 p-4">
+    <h1>Confirm Deletion</h1>
+    <p>Are you sure you want to delete budget ID number '@Model.CollegeCostId'?</p>
+
+    <form asp-action="Delete" method="post">
+        <input type="hidden" asp-for="CollegeCostId" />
+
+        <button type="submit" class="btn btn-primary">Delete</button>
+        <a asp-action="Database" class="btn btn-primary">Cancel</a>
+    </form>
+</div>
