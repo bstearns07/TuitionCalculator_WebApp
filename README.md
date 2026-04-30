@@ -26,6 +26,8 @@
 
 The **Tuition Calculator Web App** is an interactive browser-based application designed to help users estimate the cost of tuition based on selected inputs such as credit hours, residency status, and other applicable fees.
 
+Featuring ASP.NET MVC framework and a full Sql Server relational database on the backend to store you budgets, you can seamlessly work with your information.
+
 I wrote this application as my winning 1st place submission for the Skills USA 2025 - Nebraska State Championships competition.
 
 This project focuses on combining **user input validation**, **real-time calculations**, and **clean UI design** to deliver a practical and user-friendly financial estimation tool.
